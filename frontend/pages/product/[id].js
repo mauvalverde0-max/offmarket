@@ -47,6 +47,9 @@ export default function ProductDetail({ token, onOpenCart }) {
   };
 
   const handleBuyNow = () => {
+    handleAddToCart();
+    router.push('/checkout');
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-950 via-blue-950 to-slate-950 text-white p-4">
@@ -240,4 +243,4 @@ export default function ProductDetail({ token, onOpenCart }) {
 
 export async function getServerSideProps(context) {
   return { props: {} };
-}}
+}
