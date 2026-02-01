@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": "./*"
+    },
+    "jsx": "preserve",
+    "strict": false
+  },
+  "include": ["next.config.js", "**/*.js", "**/*.jsx"]
+}
