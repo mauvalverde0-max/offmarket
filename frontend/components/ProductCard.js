@@ -56,54 +56,56 @@ export default function ProductCard({ product, mode = 'retail', token }) {
   };
 
   return (
-    <div className="bg-white rounded-lg border border-gray-200 overflow-hidden hover:shadow-lg transition-shadow">
-      <div className="p-6">
+    <div className="bg-gradient-to-br from-blue-600/20 to-purple-600/20 border border-blue-500/30 rounded-xl overflow-hidden hover:border-blue-400/60 transition group hover:shadow-2xl hover:shadow-blue-500/20 backdrop-blur-sm">
+      {/* Image Placeholder */}
+      <div className="bg-gradient-to-br from-blue-500/30 to-purple-500/30 h-40 flex items-center justify-center group-hover:from-blue-500/40 group-hover:to-purple-500/40 transition">
+        <div className="text-5xl">📦</div>
+      </div>
+
+      {/* Content */}
+      <div className="p-4">
+        {/* Title */}
         <Link href={`/product/${product.id}`}>
-          <div className="cursor-pointer">
-            <h3 className="text-lg font-semibold text-gray-900 mb-2">
-              {product.name}
-            </h3>
-            <p className="text-sm text-gray-600 mb-4">
-              {product.description || 'No description'}
-            </p>
-          </div>
+          <h3 className="font-bold text-white text-lg mb-2 line-clamp-2 group-hover:text-cyan-300 transition cursor-pointer">
+            {product.name}
+          </h3>
         </Link>
 
-        <div className="flex items-center justify-between mb-4">
-          <div>
-            <Stars value={product.rating} />
-            <div className="text-xs text-gray-500 mt-1">
-              {product.rating ? `${product.rating.toFixed(1)}/5` : 'No ratings'}
-              {product.rating_count ? ` (${product.rating_count} reviews)` : ''}
-            </div>
-          </div>
-          <div className="text-right">
-            <div className="text-2xl font-bold text-blue-600">
-              ${displayPrice}
-            </div>
-            <div className="text-xs text-gray-500">{product.currency || 'USD'}</div>
-          </div>
+        {/* Rating */}
+        <div className="flex items-center gap-2 mb-3">
+          <Stars rating={product.rating} />
+          <span className="text-xs text-blue-300">
+            {product.rating ? `${product.rating.toFixed(1)}/5` : 'New'}
+            {product.rating_count ? ` (${product.rating_count})` : ''}
+          </span>
         </div>
 
-        <div className="text-sm text-gray-700 mb-4">
-          <div className="font-medium">{product.store_name}</div>
-          {mode === 'wholesale' && product.min_quantity && (
-            <div className="text-gray-600">Min: {product.min_quantity} units</div>
+        {/* Store */}
+        {product.store_name && (
+          <p className="text-sm text-blue-200 mb-3 truncate">📍 {product.store_name}</p>
+        )}
+
+        {/* Price */}
+        <div className="mb-4">
+          <div className="text-3xl font-black text-cyan-300 mb-1">${displayPrice.toFixed(2)}</div>
+          {mode === "wholesale" && product.min_quantity && (
+            <p className="text-xs text-emerald-300">💼 Min: {product.min_quantity} units</p>
           )}
         </div>
 
-        <div className="space-y-2">
+        {/* Actions */}
+        <div className="flex gap-2">
           <button
             onClick={handleCreateAlert}
-            className="w-full px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 font-medium text-sm"
+            className="flex-1 px-3 py-2 bg-gradient-to-r from-blue-500 to-cyan-500 text-white rounded-lg text-sm font-semibold hover:shadow-lg hover:shadow-blue-500/50 transition transform hover:scale-105"
           >
-            Create Alert
+            🔔 Alert
           </button>
           <button
             onClick={handleCheckout}
-            className="w-full px-4 py-2 bg-gray-100 text-gray-900 rounded-lg hover:bg-gray-200 font-medium text-sm"
+            className="flex-1 px-3 py-2 bg-emerald-600 hover:bg-emerald-500 text-white rounded-lg text-sm font-semibold transition"
           >
-            Go to Store
+            🛒 Buy
           </button>
         </div>
       </div>

@@ -10,37 +10,38 @@ export default function Header({ user, token, onLogout }) {
   };
 
   return (
-    <header className="bg-white border-b border-gray-200 sticky top-0 z-50">
+    <header className="bg-gradient-to-r from-blue-600 to-blue-800 text-white sticky top-0 z-50 shadow-lg">
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
         <Link href="/" className="flex items-center gap-2">
-          <div className="text-2xl font-bold text-blue-600">Offmarket</div>
+          <div className="text-3xl font-bold text-white">🛒 Offmarket</div>
+          <span className="text-sm text-blue-100">Smart Shopping, Better Prices</span>
         </Link>
 
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-6">
           {token && user ? (
             <>
               <Link
                 href="/alerts"
-                className="text-gray-700 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium"
+                className="text-blue-100 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition"
               >
-                My Alerts
+                🔔 Alerts
               </Link>
               <Link
                 href="/assistant"
-                className="text-gray-700 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium"
+                className="text-blue-100 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition"
               >
-                🤖 AI
+                🤖 AI Assistant
               </Link>
               <Link
                 href="/dashboard"
-                className="text-gray-700 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium"
+                className="text-blue-100 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition"
               >
-                Dashboard
+                📊 Dashboard
               </Link>
-              <span className="text-sm text-gray-600">{user.email}</span>
+              <span className="text-sm text-blue-100 border-l border-blue-400 pl-4">{user.email}</span>
               <button
                 onClick={handleLogout}
-                className="px-4 py-2 rounded-lg bg-gray-200 text-gray-800 text-sm font-medium hover:bg-gray-300"
+                className="px-4 py-2 rounded-lg bg-red-500 hover:bg-red-600 text-white text-sm font-medium transition"
               >
                 Logout
               </button>
@@ -49,7 +50,7 @@ export default function Header({ user, token, onLogout }) {
             <>
               <Link
                 href="/login"
-                className="text-gray-700 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium"
+                className="text-blue-100 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition"
               >
                 Login
               </Link>

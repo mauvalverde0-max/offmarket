@@ -51,74 +51,113 @@ export default function Home({ token }) {
   );
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
+    <main className="min-h-screen bg-gradient-to-br from-slate-950 via-blue-950 to-slate-950">
       {/* Hero Section */}
-      <section className="bg-white border-b">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-          <div className="flex justify-between items-start gap-8">
-            <div>
-              <h1 className="text-4xl font-bold text-gray-900 mb-2">Offmarket</h1>
-              <p className="text-lg text-gray-600">
-                Compare prices across stores and track your savings
-              </p>
-            </div>
-            <div className="text-right">
-              <div className="text-3xl font-bold text-blue-600">
-                {filtered.length}
+      <section className="text-white py-20 border-b border-blue-900/30">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h1 className="text-6xl md:text-7xl font-black mb-4 bg-gradient-to-r from-blue-300 via-cyan-300 to-blue-300 bg-clip-text text-transparent">
+              🛒 Offmarket
+            </h1>
+            <p className="text-2xl text-blue-100 font-light mb-8">
+              Smart Shopping, Smarter Savings
+            </p>
+            <p className="text-lg text-blue-200 max-w-2xl mx-auto mb-10">
+              Compare prices across all nearby stores in real-time, track your monthly savings, and unlock exclusive deals with our AI-powered assistant.
+            </p>
+            {!token && (
+              <div className="flex gap-4 justify-center flex-wrap">
+                <Link
+                  href="/register"
+                  className="px-10 py-4 bg-gradient-to-r from-blue-500 to-cyan-500 text-white font-bold rounded-xl hover:shadow-2xl hover:shadow-blue-500/50 transition transform hover:scale-105 text-lg"
+                >
+                  Get Started Free →
+                </Link>
+                <Link
+                  href="/login"
+                  className="px-10 py-4 border-2 border-blue-400 text-blue-300 font-bold rounded-xl hover:bg-blue-900/20 transition text-lg"
+                >
+                  Sign In
+                </Link>
               </div>
-              <div className="text-sm text-gray-600">products available</div>
-            </div>
+            )}
           </div>
 
-          {/* Filters */}
-          <div className="mt-6 space-y-4">
-            <div className="flex gap-4 items-center flex-wrap">
+          {/* Stats */}
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-12">
+            <div className="bg-gradient-to-br from-blue-500/20 to-cyan-500/10 border border-blue-500/30 rounded-xl p-6 text-center backdrop-blur-sm hover:border-blue-400/60 transition">
+              <div className="text-4xl font-bold text-cyan-300 mb-2">{filtered.length}+</div>
+              <div className="text-blue-100 font-medium">Products Available</div>
+            </div>
+            <div className="bg-gradient-to-br from-emerald-500/20 to-green-500/10 border border-emerald-500/30 rounded-xl p-6 text-center backdrop-blur-sm hover:border-emerald-400/60 transition">
+              <div className="text-4xl font-bold text-emerald-300 mb-2">💰</div>
+              <div className="text-blue-100 font-medium">Save Up To 40%</div>
+            </div>
+            <div className="bg-gradient-to-br from-orange-500/20 to-red-500/10 border border-orange-500/30 rounded-xl p-6 text-center backdrop-blur-sm hover:border-orange-400/60 transition">
+              <div className="text-4xl font-bold text-orange-300 mb-2">📍</div>
+              <div className="text-blue-100 font-medium">Real-Time Location</div>
+            </div>
+            <div className="bg-gradient-to-br from-purple-500/20 to-pink-500/10 border border-purple-500/30 rounded-xl p-6 text-center backdrop-blur-sm hover:border-purple-400/60 transition">
+              <div className="text-4xl font-bold text-purple-300 mb-2">🤖</div>
+              <div className="text-blue-100 font-medium">AI Assistant</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Search & Filters */}
+      <section className="bg-gradient-to-b from-blue-900/20 to-transparent py-8 border-b border-blue-900/30">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="space-y-6">
+            <div className="flex gap-3 items-center flex-wrap">
               <input
                 type="text"
-                placeholder="Search products..."
+                placeholder="🔍 Search milk, eggs, vegetables..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="flex-1 min-w-[200px] px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="flex-1 min-w-64 px-5 py-3 bg-white/10 border border-blue-400/30 rounded-xl text-white placeholder-blue-300 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent backdrop-blur-sm"
               />
               <select
                 value={mode}
                 onChange={(e) => setMode(e.target.value)}
-                className="px-4 py-2 border border-gray-300 rounded-lg bg-white cursor-pointer"
+                className="px-6 py-3 bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-xl font-semibold hover:shadow-lg transition border border-blue-500/50"
               >
-                <option value="retail">Retail Pricing</option>
-                <option value="wholesale">Wholesale Mode</option>
+                <option value="retail">🛍️ Retail</option>
+                <option value="wholesale">📦 Wholesale</option>
               </select>
-              {latitude && (
-                <div className="text-sm text-gray-600">
-                  Showing stores within {radius}km
-                </div>
-              )}
             </div>
-            <div className="flex gap-2">
-              {[10, 25, 50, 100].map((r) => (
-                <button
-                  key={r}
-                  onClick={() => setRadius(r)}
-                  className={`px-3 py-1 rounded-full text-sm ${
-                    radius === r
-                      ? 'bg-blue-600 text-white'
-                      : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
-                  }`}
-                >
-                  {r}km
-                </button>
-              ))}
-            </div>
+            
+            {latitude && (
+              <div className="flex gap-2 items-center">
+                <span className="text-sm text-blue-300 font-medium">📍 Search Radius:</span>
+                {[10, 25, 50, 100].map((r) => (
+                  <button
+                    key={r}
+                    onClick={() => setRadius(r)}
+                    className={`px-4 py-2 rounded-lg text-sm font-semibold transition ${ 
+                      radius === r
+                        ? 'bg-gradient-to-r from-blue-500 to-cyan-500 text-white shadow-lg shadow-blue-500/50'
+                        : 'bg-white/5 text-blue-200 hover:bg-white/10 border border-white/10'
+                    }`}
+                  >
+                    {r}km
+                  </button>
+                ))}
+              </div>
+            )}
           </div>
         </div>
       </section>
 
       {/* Featured Products */}
       {featured.length > 0 && (
-        <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-          <h2 className="text-2xl font-bold text-gray-900 mb-6">Products of the Day</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {featured.slice(0, 3).map((product) => (
+        <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+          <div className="mb-12">
+            <h2 className="text-4xl font-bold text-white mb-2">⭐ Today's Best Deals</h2>
+            <p className="text-blue-300">Hand-picked products trending in your area</p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {featured.slice(0, 4).map((product) => (
               <ProductCard
                 key={product.id}
                 product={product}
@@ -131,20 +170,30 @@ export default function Home({ token }) {
       )}
 
       {/* All Products */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <h2 className="text-2xl font-bold text-gray-900 mb-6">All Products</h2>
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20">
+        <div className="mb-12">
+          <h2 className="text-4xl font-bold text-white mb-2">Available Products</h2>
+          <p className="text-blue-300">{filtered.length} items available in your area</p>
+        </div>
+        
         {productsError ? (
-          <div className="bg-red-50 border border-red-200 text-red-800 px-4 py-3 rounded-lg">
-            Error loading products. Please try again.
+          <div className="bg-red-500/10 border border-red-500/30 text-red-300 px-6 py-4 rounded-xl backdrop-blur-sm">
+            ⚠️ Error loading products. Please try again.
           </div>
         ) : filtered.length === 0 ? (
-          <div className="bg-gray-50 border border-gray-200 text-gray-600 px-4 py-3 rounded-lg text-center">
-            {searchQuery
-              ? 'No products match your search'
-              : 'No products available'}
+          <div className="bg-blue-500/10 border border-blue-500/30 text-blue-300 px-6 py-12 rounded-xl text-center backdrop-blur-sm">
+            <div className="text-5xl mb-4">🔍</div>
+            <p className="text-lg font-medium mb-4">
+              {searchQuery ? 'No products match your search' : 'No products available'}
+            </p>
+            {!token && (
+              <Link href="/register" className="text-blue-400 hover:text-cyan-300 font-semibold underline">
+                Sign up to see nearby deals
+              </Link>
+            )}
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {filtered.map((product) => (
               <ProductCard
                 key={product.id}
