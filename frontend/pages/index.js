@@ -1,6 +1,8 @@
 import useSWR from 'swr';
 import { useState, useEffect } from 'react';
 import ProductCard from '@/components/ProductCard';
+import MapComponent from '@/components/MapComponent';
+import PromotionBanner from '@/components/PromotionBanner';
 import Link from 'next/link';
 
 const fetcher = (url, token) =>
@@ -52,6 +54,9 @@ export default function Home({ token }) {
 
   return (
     <main className="min-h-screen bg-gradient-to-br from-slate-950 via-blue-950 to-slate-950">
+      {/* Promotion Banner */}
+      <PromotionBanner />
+
       {/* Hero Section */}
       <section className="text-white py-20 border-b border-blue-900/30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
