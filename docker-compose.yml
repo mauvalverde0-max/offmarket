@@ -1,0 +1,73 @@
+version: '3.8'
+
+services:
+  # PostgreSQL Database
+  postgres:
+    image: postgres:15-alpine
+    container_name: offmarket-db
+    environment:
+      POSTGRES_USER: offmarket
+      POSTGRES_PASSWORD: offmarket_dev_password
+      POSTGRES_DB: offmarket
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U offmarket"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Backend API
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: offmarket-backend
+    environment:
+      NODE_ENV: development
+      PORT: 5000
+      DATABASE_URL: postgresql://offmarket:offmarket_dev_password@postgres:5432/offmarket
+      JWT_SECRET: dev-secret-key-change-in-production
+      BACKEND_URL: http://localhost:5000
+      FRONTEND_URL: http://localhost:3000
+      SMTP_HOST: smtp.ethereal.email
+      SMTP_PORT: 587
+      SMTP_USER: ${SMTP_USER}
+      SMTP_PASS: ${SMTP_PASS}
+      OPENAI_API_KEY: ${OPENAI_API_KEY}
+    ports:
+      - "5000:5000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    volumes:
+      - ./backend/src:/app/src
+    command: npm run dev
+
+  # Frontend
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: offmarket-frontend
+    environment:
+      NEXT_PUBLIC_API_URL: http://localhost:5000
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+    volumes:
+      - ./frontend/pages:/app/pages
+      - ./frontend/components:/app/components
+      - ./frontend/styles:/app/styles
+      - ./frontend/utils:/app/utils
+    command: npm run dev
+
+volumes:
+  postgres_data:
+
+networks:
+  default:
+    name: offmarket-network
