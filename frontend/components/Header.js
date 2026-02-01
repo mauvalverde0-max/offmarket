@@ -2,9 +2,11 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useState, useEffect } from 'react';
 import { getCartItemCount } from '@/utils/cart';
+import { useLanguage } from '@/utils/i18n';
 
 export default function Header({ user, token, onLogout, onCartOpen }) {
   const router = useRouter();
+  const { language, setLanguage, t } = useLanguage();
   const [cartCount, setCartCount] = useState(0);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -36,6 +38,30 @@ export default function Header({ user, token, onLogout, onCartOpen }) {
 
         {/* Desktop Menu */}
         <div className="hidden md:flex items-center gap-2 lg:gap-6">
+          {/* Language Selector */}
+          <div className="flex items-center gap-1 bg-blue-700 rounded-lg p-1">
+            <button
+              onClick={() => setLanguage('es')}
+              className={`px-3 py-1 rounded transition text-sm font-medium ${
+                language === 'es'
+                  ? 'bg-white text-blue-700'
+                  : 'text-blue-100 hover:text-white'
+              }`}
+            >
+              🇦🇷 ES
+            </button>
+            <button
+              onClick={() => setLanguage('en')}
+              className={`px-3 py-1 rounded transition text-sm font-medium ${
+                language === 'en'
+                  ? 'bg-white text-blue-700'
+                  : 'text-blue-100 hover:text-white'
+              }`}
+            >
+              🇺🇸 EN
+            </button>
+          </div>
+
           {token && user ? (
             <>
               <Link href="/alerts" className="text-blue-100 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition">
@@ -96,6 +122,30 @@ export default function Header({ user, token, onLogout, onCartOpen }) {
 
         {/* Mobile Menu Button */}
         <div className="md:hidden flex items-center gap-3">
+          {/* Mobile Language Selector */}
+          <div className="flex items-center gap-0.5 bg-blue-700 rounded-lg p-0.5">
+            <button
+              onClick={() => setLanguage('es')}
+              className={`px-2 py-1 rounded text-xs font-medium transition ${
+                language === 'es'
+                  ? 'bg-white text-blue-700'
+                  : 'text-blue-100 hover:text-white'
+              }`}
+            >
+              ES
+            </button>
+            <button
+              onClick={() => setLanguage('en')}
+              className={`px-2 py-1 rounded text-xs font-medium transition ${
+                language === 'en'
+                  ? 'bg-white text-blue-700'
+                  : 'text-blue-100 hover:text-white'
+              }`}
+            >
+              EN
+            </button>
+          </div>
+
           <button
             onClick={handleCartOpen}
             className="relative text-white text-2xl hover:opacity-80 transition"

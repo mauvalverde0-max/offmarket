@@ -6,6 +6,8 @@ import PromotionBanner from '@/components/PromotionBanner';
 import LocationRequester from '@/components/LocationRequester';
 import NearbyStores from '@/components/NearbyStores';
 import ImprovedChatbot from '@/components/ImprovedChatbot';
+import AdvancedChatbot from '@/components/AdvancedChatbot';
+import PriceComparison from '@/components/PriceComparison';
 import { useLanguage } from '@/utils/i18n';
 import Link from 'next/link';
 
@@ -60,23 +62,6 @@ export default function Home({ token }) {
 
   return (
     <main className="min-h-screen bg-gradient-to-br from-slate-950 via-blue-950 to-slate-950">
-      {/* Language Selector */}
-      <div className="fixed top-4 right-4 z-20 flex gap-2">
-        {['es', 'en'].map(lang => (
-          <button
-            key={lang}
-            onClick={() => setLanguage(lang)}
-            className={`px-4 py-2 rounded font-medium transition ${
-              language === lang
-                ? 'bg-blue-600 text-white'
-                : 'bg-slate-700 text-blue-300 hover:bg-slate-600'
-            }`}
-          >
-            {lang.toUpperCase()}
-          </button>
-        ))}
-      </div>
-
       {/* Promotion Banner */}
       <PromotionBanner />
 
@@ -246,7 +231,15 @@ export default function Home({ token }) {
         )}
       </section>
 
-      {/* Improved Chatbot */}
+      {/* Price Comparison Section */}
+      <section className="max-w-7xl mx-auto px-4 py-16">
+        <PriceComparison />
+      </section>
+
+      {/* Advanced Chatbot - AI Powered */}
+      <AdvancedChatbot products={filtered} />
+      
+      {/* Improved Chatbot - Fallback */}
       <ImprovedChatbot products={filtered} stores={[]} />
     </main>
   );
