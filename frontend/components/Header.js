@@ -26,6 +26,12 @@ export default function Header({ user, token, onLogout }) {
                 My Alerts
               </Link>
               <Link
+                href="/assistant"
+                className="text-gray-700 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium"
+              >
+                🤖 AI
+              </Link>
+              <Link
                 href="/dashboard"
                 className="text-gray-700 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium"
               >
