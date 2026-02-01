@@ -3,6 +3,10 @@ import useSWR from 'swr';
 import DashboardSavings from '@/components/DashboardSavings';
 import { apiCall } from '@/utils/fetcher';
 
+export const getServerSideProps = async () => {
+  return { props: {} };
+};
+
 const fetcher = (url, token) =>
   fetch(`${process.env.NEXT_PUBLIC_API_URL}${url}`, {
     headers: token ? { Authorization: `Bearer ${token}` } : {},

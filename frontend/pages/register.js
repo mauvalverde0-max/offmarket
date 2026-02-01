@@ -2,6 +2,10 @@ import { useState } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 
+export const getServerSideProps = async () => {
+  return { props: {} };
+};
+
 export default function Register({ setToken, setUser }) {
   const router = useRouter();
   const [email, setEmail] = useState('');

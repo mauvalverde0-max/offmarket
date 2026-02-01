@@ -3,6 +3,10 @@ import { useRouter } from 'next/router';
 import useSWR from 'swr';
 import { apiCall } from '@/utils/fetcher';
 
+export const getServerSideProps = async () => {
+  return { props: {} };
+};
+
 export default function Alerts({ token }) {
   const router = useRouter();
   const [alerts, setAlerts] = useState([]);
