@@ -68,12 +68,10 @@ export default function LocalDashboard() {
 
         {/* Action Buttons */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-12">
-          <Link href="/local/products/manage">
-            <a className="block bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 p-6 rounded-lg transition text-center">
-              <div className="text-3xl mb-2">📝</div>
-              <h3 className="font-bold text-lg mb-1">Gestionar Productos</h3>
-              <p className="text-sm text-blue-100">Agregar, editar o eliminar productos</p>
-            </a>
+          <Link href="/local/products/manage" className="block bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 p-6 rounded-lg transition text-center">
+            <div className="text-3xl mb-2">📝</div>
+            <h3 className="font-bold text-lg mb-1">Gestionar Productos</h3>
+            <p className="text-sm text-blue-100">Agregar, editar o eliminar productos</p>
           </Link>
 
           <a href="#" className="block bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-700 hover:to-emerald-800 p-6 rounded-lg transition text-center">
@@ -96,10 +94,8 @@ export default function LocalDashboard() {
           {products.length === 0 ? (
             <div className="text-center py-12">
               <p className="text-gray-400 mb-4">No tienes productos aún</p>
-              <Link href="/local/products/manage">
-                <a className="inline-block bg-blue-600 hover:bg-blue-700 px-6 py-2 rounded-lg font-semibold transition">
-                  Agregar Producto
-                </a>
+              <Link href="/local/products/manage" className="inline-block bg-blue-600 hover:bg-blue-700 px-6 py-2 rounded-lg font-semibold transition">
+                Agregar Producto
               </Link>
             </div>
           ) : (

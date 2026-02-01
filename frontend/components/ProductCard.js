@@ -84,10 +84,8 @@ export default function ProductCard({ product, mode = 'retail', token, onOpenCar
       {/* Content */}
       <div className="p-4">
         {/* Title */}
-        <Link href={`/product/${product.id}`}>
-          <h3 className="font-bold text-white text-lg mb-2 line-clamp-2 group-hover:text-cyan-300 transition cursor-pointer">
-            {product.name}
-          </h3>
+        <Link href={`/product/${product.id}`} className="font-bold text-white text-lg mb-2 line-clamp-2 group-hover:text-cyan-300 transition cursor-pointer block">
+          {product.name}
         </Link>
 
         {/* Rating */}

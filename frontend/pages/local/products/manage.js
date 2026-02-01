@@ -90,10 +90,8 @@ export default function LocalProductsManage() {
       <div className="max-w-6xl mx-auto py-8">
         {/* Header */}
         <div className="mb-8">
-          <Link href="/">
-            <a className="inline-flex items-center gap-2 text-blue-400 hover:text-blue-300 mb-4">
-              ← Volver
-            </a>
+          <Link href="/" className="inline-flex items-center gap-2 text-blue-400 hover:text-blue-300 mb-4">
+            ← Volver
           </Link>
           <h1 className="text-4xl font-bold mb-2">🏪 Gestor de Productos</h1>
           <p className="text-gray-400">Administra tu catálogo de productos</p>

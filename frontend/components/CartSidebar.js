@@ -60,10 +60,8 @@ export default function CartSidebar({ isOpen, onClose }) {
           {cart.length === 0 ? (
             <div className="text-center py-8">
               <p className="text-gray-400 mb-4">Tu carrito está vacío</p>
-              <Link href="/">
-                <a className="inline-block bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 px-6 py-2 rounded-lg text-white font-semibold transition">
-                  Seguir comprando
-                </a>
+              <Link href="/" className="inline-block bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 px-6 py-2 rounded-lg text-white font-semibold transition">
+                Seguir comprando
               </Link>
             </div>
           ) : (
@@ -132,13 +130,11 @@ export default function CartSidebar({ isOpen, onClose }) {
                   </p>
                 </div>
 
-                <Link href="/checkout">
-                  <a
-                    onClick={onClose}
-                    className="w-full block text-center bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 py-3 rounded-lg text-white font-bold transition transform hover:scale-105"
-                  >
-                    Proceder al Pago 💳
-                  </a>
+                <Link href="/checkout"
+                  onClick={onClose}
+                  className="w-full block text-center bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 py-3 rounded-lg text-white font-bold transition transform hover:scale-105"
+                >
+                  Proceder al Pago 💳
                 </Link>
 
                 <button

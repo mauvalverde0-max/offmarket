@@ -37,10 +37,8 @@ export default function PointsPage() {
     <div className="min-h-screen bg-gradient-to-br from-slate-950 via-blue-950 to-slate-950 text-white p-4">
       <div className="max-w-6xl mx-auto py-8">
         {/* Breadcrumb */}
-        <Link href="/">
-          <a className="inline-flex items-center gap-2 text-blue-400 hover:text-blue-300 mb-8">
-            ← Volver al inicio
-          </a>
+        <Link href="/" className="inline-flex items-center gap-2 text-blue-400 hover:text-blue-300 mb-8">
+          ← Volver al inicio
         </Link>
 
         <h1 className="text-4xl font-bold mb-2">🎁 Puntos de Lealtad</h1>
@@ -61,10 +59,8 @@ export default function PointsPage() {
               {history.length === 0 ? (
                 <div className="bg-slate-800 border border-blue-500/20 rounded-lg p-8 text-center">
                   <p className="text-gray-400 mb-4">Aún no tienes historial de puntos</p>
-                  <Link href="/">
-                    <a className="inline-block bg-blue-600 hover:bg-blue-700 px-6 py-2 rounded-lg text-white font-semibold transition">
-                      Realiza tu primera compra
-                    </a>
+                  <Link href="/" className="inline-block bg-blue-600 hover:bg-blue-700 px-6 py-2 rounded-lg text-white font-semibold transition">
+                    Realiza tu primera compra
                   </Link>
                 </div>
               ) : (

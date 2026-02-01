@@ -102,10 +102,8 @@ export default function Checkout() {
       <div className="max-w-4xl mx-auto py-8">
         {/* Encabezado */}
         <div className="mb-8">
-          <Link href="/">
-            <a className="inline-flex items-center gap-2 text-blue-400 hover:text-blue-300 mb-4">
-              ← Volver
-            </a>
+          <Link href="/" className="inline-flex items-center gap-2 text-blue-400 hover:text-blue-300 mb-4">
+            ← Volver
           </Link>
           <h1 className="text-4xl font-bold mb-2">🛒 Checkout</h1>
           <p className="text-gray-400">Paso {step} de 4</p>
@@ -446,15 +444,11 @@ export default function Checkout() {
                 </div>
 
                 <div className="space-y-3">
-                  <Link href="/dashboard">
-                    <a className="block bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 py-3 rounded-lg text-white font-bold transition">
-                      Ver mis compras
-                    </a>
+                  <Link href="/dashboard" className="block bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 py-3 rounded-lg text-white font-bold transition">
+                    Ver mis compras
                   </Link>
-                  <Link href="/">
-                    <a className="block bg-slate-700 hover:bg-slate-600 py-3 rounded-lg text-white font-bold transition">
-                      Volver al inicio
-                    </a>
+                  <Link href="/" className="block bg-slate-700 hover:bg-slate-600 py-3 rounded-lg text-white font-bold transition">
+                    Volver al inicio
                   </Link>
                 </div>
               </div>

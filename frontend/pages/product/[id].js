@@ -55,10 +55,8 @@ export default function ProductDetail({ token, onOpenCart }) {
     <div className="min-h-screen bg-gradient-to-br from-slate-950 via-blue-950 to-slate-950 text-white p-4">
       <div className="max-w-6xl mx-auto py-8">
         {/* Breadcrumb */}
-        <Link href="/">
-          <a className="inline-flex items-center gap-2 text-blue-400 hover:text-blue-300 mb-8">
-            ← Volver al inicio
-          </a>
+        <Link href="/" className="inline-flex items-center gap-2 text-blue-400 hover:text-blue-300 mb-8">
+          ← Volver
         </Link>
 
         <div className="grid md:grid-cols-2 gap-12 mb-12">
@@ -172,10 +170,8 @@ export default function ProductDetail({ token, onOpenCart }) {
                   </button>
                 </div>
               ) : (
-                <Link href="/login">
-                  <a className="block text-center bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 py-3 rounded-lg text-white font-bold transition">
-                    Ingresar para Comprar
-                  </a>
+                <Link href="/login" className="block text-center bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 py-3 rounded-lg text-white font-bold transition">
+                  Ingresar para Comprar
                 </Link>
               )}
 
