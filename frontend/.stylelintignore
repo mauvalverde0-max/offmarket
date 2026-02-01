@@ -1,0 +1,2 @@
+# Ignore @tailwind warnings - these are valid Tailwind directives
+@tailwind
