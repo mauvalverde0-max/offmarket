@@ -1,6 +1,7 @@
 import '@/styles/globals.css';
 import Header from '@/components/Header';
 import { useState, useEffect } from 'react';
+import { Analytics } from '@vercel/analytics/react';
 
 export default function App({ Component, pageProps }) {
   const [token, setToken] = useState(null);
@@ -27,6 +28,7 @@ export default function App({ Component, pageProps }) {
     <>
       <Header user={user} token={token} onLogout={logout} />
       <Component {...pageProps} token={token} user={user} setToken={setToken} setUser={setUser} />
+      <Analytics />
     </>
   );
 }
