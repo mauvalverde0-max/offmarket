@@ -3,6 +3,10 @@ import { useState, useEffect } from 'react';
 import ProductCard from '@/components/ProductCard';
 import MapComponent from '@/components/MapComponent';
 import PromotionBanner from '@/components/PromotionBanner';
+import LocationRequester from '@/components/LocationRequester';
+import NearbyStores from '@/components/NearbyStores';
+import ImprovedChatbot from '@/components/ImprovedChatbot';
+import { useLanguage } from '@/utils/i18n';
 import Link from 'next/link';
 
 const fetcher = (url, token) =>
@@ -11,8 +15,10 @@ const fetcher = (url, token) =>
   }).then((r) => r.json());
 
 export default function Home({ token }) {
+  const { t, language, setLanguage } = useLanguage();
   const [searchQuery, setSearchQuery] = useState('');
   const [mode, setMode] = useState('retail'); // retail or wholesale
+  const [userLocation, setUserLocation] = useState(null);
   const [latitude, setLatitude] = useState(null);
   const [longitude, setLongitude] = useState(null);
   const [radius, setRadius] = useState(50);
@@ -54,6 +60,23 @@ export default function Home({ token }) {
 
   return (
     <main className="min-h-screen bg-gradient-to-br from-slate-950 via-blue-950 to-slate-950">
+      {/* Language Selector */}
+      <div className="fixed top-4 right-4 z-20 flex gap-2">
+        {['es', 'en'].map(lang => (
+          <button
+            key={lang}
+            onClick={() => setLanguage(lang)}
+            className={`px-4 py-2 rounded font-medium transition ${
+              language === lang
+                ? 'bg-blue-600 text-white'
+                : 'bg-slate-700 text-blue-300 hover:bg-slate-600'
+            }`}
+          >
+            {lang.toUpperCase()}
+          </button>
+        ))}
+      </div>
+
       {/* Promotion Banner */}
       <PromotionBanner />
 
@@ -154,6 +177,18 @@ export default function Home({ token }) {
         </div>
       </section>
 
+      {/* Location Requester */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <LocationRequester onLocationReceived={setUserLocation} />
+      </section>
+
+      {/* Nearby Stores */}
+      {userLocation && (
+        <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-8">
+          <NearbyStores userLocation={userLocation} />
+        </section>
+      )}
+
       {/* Featured Products */}
       {featured.length > 0 && (
         <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
@@ -210,6 +245,9 @@ export default function Home({ token }) {
           </div>
         )}
       </section>
+
+      {/* Improved Chatbot */}
+      <ImprovedChatbot products={filtered} stores={[]} />
     </main>
   );
 }
