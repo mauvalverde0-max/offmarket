@@ -3,7 +3,7 @@ import { fetchSupermarketPrices, findCheapest, calculateSavings, getSupermarketI
 import { useLanguage } from '@/utils/i18n';
 
 export default function PriceComparison() {
-  const { language, t } = useLanguage();
+  const { language } = useLanguage();
   const [searchProduct, setSearchProduct] = useState('');
   const [prices, setPrices] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -42,7 +42,7 @@ export default function PriceComparison() {
             value={searchProduct}
             onChange={(e) => setSearchProduct(e.target.value)}
             placeholder={language === 'es' ? 'Buscar producto...' : 'Search product...'}
-            className="flex-1 px-4 py-2 rounded-lg border border-blue-300 focus:outline-none focus:ring-2 focus:ring-blue-600"
+            className="flex-1 px-4 py-2 rounded-lg border border-blue-300 focus:outline-none focus:ring-2 focus:ring-blue-600 text-gray-900"
           />
           <button
             type="submit"
@@ -68,8 +68,8 @@ export default function PriceComparison() {
             <div className="bg-green-100 border-2 border-green-500 rounded-lg p-4">
               <p className="text-sm text-green-700">
                 💚 {language === 'es'
-                  ? `Puedes ahorrar $${savings.savings} (${savings.percentage}%) eligiendo el supermercado más barato`
-                  : `You can save $${savings.savings} (${savings.percentage}%) by choosing the cheapest supermarket`}
+                  ? `Puedes ahorrar $${savings.savings} (${savings.percentage}%) eligiendo el más barato`
+                  : `You can save $${savings.savings} (${savings.percentage}%) choosing the cheapest`}
               </p>
             </div>
           )}
@@ -92,7 +92,7 @@ export default function PriceComparison() {
                   {isCheapest && (
                     <div className="text-center mb-2">
                       <span className="bg-yellow-500 text-white px-2 py-1 rounded text-xs font-bold">
-                        🏆 {language === 'es' ? 'MÁS BARATO' : 'CHEAPEST'}
+                        🏆 {language === 'es' ? 'BEST' : 'BEST'}
                       </span>
                     </div>
                   )}
@@ -104,87 +104,37 @@ export default function PriceComparison() {
 
                     {priceData.discount > 0 && (
                       <p className="text-sm text-red-600 font-semibold">
-                        -{priceData.discount}% {language === 'es' ? 'Desc.' : 'Off'}
+                        -{priceData.discount}%
                       </p>
                     )}
 
-                    {!priceData.available && (
-                      <p className="text-xs text-gray-500 mt-2">
+                    {priceData.available ? (
+                      <button className="mt-3 w-full bg-blue-600 text-white text-sm px-3 py-1 rounded hover:bg-blue-700 transition">
+                        {language === 'es' ? 'Comprar' : 'Buy'}
+                      </button>
+                    ) : (
+                      <p className="text-xs text-gray-500 mt-3">
                         {language === 'es' ? 'No disponible' : 'Not available'}
                       </p>
                     )}
-
-                    {priceData.available && (
-              </div>
-          <div className="text-center">
-            <p className="text-xs text-gray-400 mb-1">Ahorro</p>
-            <p className="text-xl font-bold text-red-400">${savings.toFixed(2)}</p>
+                  </div>
+                </div>
+              );
+            })}
           </div>
         </div>
-      </div>
+      )}
 
-      {/* Tabla de precios */}
-      <div className="space-y-2">
-        {prices.map((price) => (
-          <div
-            key={price.storeId}
-            className="flex items-center justify-between p-3 bg-slate-700 rounded-lg hover:bg-slate-600 transition"
-          >
-            <div>
-              <p className="text-white font-medium">{price.storeName}</p>
-              <p className="text-xs text-gray-400">{price.distance.toFixed(1)} km</p>
-            </div>
-            <div className="text-right">
-              <p className="text-xl font-bold text-green-400">${price.price.toFixed(2)}</p>
-              {price.price === minPrice && (
-                <p className="text-xs text-yellow-300 font-semibold">🏆 Más barato</p>
-              )}
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-}
-          <div className="text-center">
-            <p className="text-xs text-gray-400 mb-1">Ahorros Posibles</p>
-            <p className="text-xl font-bold text-yellow-400">${savings.toFixed(2)}</p>
-          </div>
+      {/* Empty State */}
+      {!prices && !loading && (
+        <div className="text-center py-8 text-gray-600">
+          <p className="text-lg">
+            {language === 'es'
+              ? '🔍 Busca un producto para comparar precios'
+              : '🔍 Search for a product to compare prices'}
+          </p>
         </div>
-      </div>
-
-      {/* Lista de tiendas */}
-      <div className="space-y-2">
-        {prices.map((item, idx) => (
-          <div key={item.storeId} className="flex items-center gap-3 p-3 bg-slate-800/50 rounded-lg">
-            {/* Ranking */}
-            <div className="flex-shrink-0 w-8 h-8 flex items-center justify-center rounded-full bg-blue-600">
-              <span className="text-sm font-bold text-white">#{idx + 1}</span>
-            </div>
-
-            {/* Tienda */}
-            <div className="flex-1">
-              <p className="font-semibold text-white">{item.storeName}</p>
-              <p className="text-xs text-gray-400">
-                📍 {item.distance.toFixed(1)}km
-              </p>
-            </div>
-
-            {/* Precio */}
-            <div className="text-right">
-              <p className="text-xl font-bold text-cyan-300">${item.price.toFixed(2)}</p>
-              {item.price === minPrice && (
-                <p className="text-xs text-green-400 font-semibold">Mejor precio</p>
-              )}
-            </div>
-
-            {/* Botón */}
-            <button className="text-blue-400 hover:text-blue-300 text-sm font-semibold px-3 py-1 bg-blue-600/20 rounded">
-              Ver
-            </button>
-          </div>
-        ))}
-      </div>
+      )}
     </div>
   );
 }
